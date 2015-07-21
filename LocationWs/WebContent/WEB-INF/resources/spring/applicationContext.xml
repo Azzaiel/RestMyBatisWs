@@ -10,7 +10,9 @@
 		http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- =============== Component Scans =============== -->
+	
 	<context:component-scan base-package="net.virtela.service.*" />
+	
 	<context:component-scan base-package="net.virtela.dao.*" />
 
 	<!-- =============== Rest API Service Registration =============== -->
@@ -30,7 +32,7 @@
 			value="classpath:WEB-INF/resources/config/accessuser3-mybatisV3-config.xml" />
 	</bean>
 
-	<!-- =============== SessionFactory Mapper ================ -->
+	<!-- =============== Session Factory Mapper ================ -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="net.virtela.dao" />
 		<property name="sqlSessionFactoryBeanName" value="accessuser3SessionFactory" />
