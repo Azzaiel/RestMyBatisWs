@@ -96,7 +96,7 @@
 		</dependency>
 
 		<!-- Connection pulling -->
-
+		
 		<dependency>
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
