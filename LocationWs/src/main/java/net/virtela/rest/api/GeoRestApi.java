@@ -1,6 +1,9 @@
 package net.virtela.rest.api;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -10,6 +13,7 @@ import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import net.virtela.model.Country;
 import net.virtela.service.GeoService;
@@ -51,7 +55,7 @@ public class GeoRestApi {
 	@GET
 	@Path("v1.0/countries/{id}")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getCountries(@PathParam("id") Long id) {
+	public Response getCountryById(@PathParam("id") Long id) {
 		final Country country = this.geoService.getCountryById(id);
 		if (country != null) {
 			return Response.status(Status.OK).entity(this.geoService.getCountryById(id)).build();
@@ -59,5 +63,52 @@ public class GeoRestApi {
 		return Response.status(Status.NOT_FOUND).entity("Record not Found").build();	
 		
 	}
+	
+	/**
+	 * Inserts resources (Country) to the database
+	 * 
+	 * Response: 
+	 *    200 - Record was Created. 
+	 *    401 - User has no Access 
+	 *    406 - Insert Failed.
+	 * 
+	 * @return
+	 */
+	@POST
+	@Path("v1.0/countries")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Transactional
+	public Response createCountry(Country country) {
+		if (this.geoService.createCountry(country) > 0) {
+			return Response.status(Status.OK).entity("Record has been created").build();
+		} 
+		return Response.status(Status.BAD_REQUEST).entity("Insert Failed").build();	
+		
+	}
+	
+	/**
+	 * updates resources (Country) to the database
+	 * 
+	 * Response: 
+	 *    200 - Record was Created. 
+	 *    401 - User has no Access 
+	 *    406 - Insert Failed.
+	 * 
+	 * @return
+	 */
+	@PUT
+	@Path("v1.0/countries/{id}")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Transactional
+	public Response updateCountry(@PathParam("id") Long id, Country country) {
+		if (this.geoService.updateCountry(country, id) > 0) {
+			return Response.status(Status.OK).entity("Record has been updated").build();
+		} 
+		return Response.status(Status.BAD_REQUEST).entity("Updated Failed").build();	
+		
+	}
+
 
 }

@@ -35,20 +35,29 @@ public class GeoServiceImpl implements GeoService {
 
 	@Override
 	public Long createCountry(Country country) {
-		// TODO Auto-generated method stub
-		return null;
+		if (country != null && country.getName() != null) {
+			return this.geoDao.createCountry(country);
+		}
+		return 0l;
 	}
 
 	@Override
-	public int updateCountry(Country country) {
-		// TODO Auto-generated method stub
+	public int updateCountry(Country country, Long id) {
+		if (id > 0 && country != null && country.getName() != null) {
+			country.setId(id);
+			return this.geoDao.updateCountry(country);
+		}
 		return 0;
 	}
 
 	@Override
 	public Long deleteCountryById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		if (id != null && id > 0) {
+			return this.geoDao.deleteCountryById(id);
+		}
+		return 0l;
 	}
+	
+	
 
 }

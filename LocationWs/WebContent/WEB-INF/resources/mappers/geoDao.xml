@@ -14,6 +14,7 @@
 	<select id="getCountries" resultMap="countryMap">
 		Select ID, NAME, CODE, LAST_MODE_BY, LAST_MODE_DATE
 		From ACCESSUSER3.VIRTELA_COUNTRIES
+		Order By LAST_MODE_DATE desc
 	</select>
 	
 	<select id="getCountryById" resultMap="countryMap">
@@ -22,8 +23,7 @@
 		Where ID = #{id}
 	</select>
 	
-	<insert id="createCountry" parameterType="Country"
-		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+	<insert id="createCountry" parameterType="Country" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 		<selectKey keyProperty="id" resultType="long" order="BEFORE">
 			Select ACCESSUSER3.V_COUNTRIES_SEQ.nextval From Dual
 		</selectKey>
@@ -32,7 +32,7 @@
 	</insert>
 	
 	<update id="updateCountry" parameterType="Country" >
-		Update ACCESSUSER3.V_COUNTRIES_SEQ
+		Update ACCESSUSER3.VIRTELA_COUNTRIES
 		Set NAME          = #{name}
 		    , CODE        = #{code}
 		    , LAST_MODE_BY   = #{lastModBy}

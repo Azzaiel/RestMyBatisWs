@@ -12,7 +12,7 @@ public interface GeoService {
 
 	public Long createCountry(Country country);
 
-	public int updateCountry(Country country);
+	public int updateCountry(Country country, Long id);
 
 	public Long deleteCountryById(Long id);
 	
