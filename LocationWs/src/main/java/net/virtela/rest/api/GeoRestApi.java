@@ -1,6 +1,7 @@
 package net.virtela.rest.api;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -70,7 +71,7 @@ public class GeoRestApi {
 	 * Response: 
 	 *    200 - Record was Created. 
 	 *    401 - User has no Access 
-	 *    406 - Insert Failed.
+	 *    406 - Request Failed.
 	 * 
 	 * @return
 	 */
@@ -88,12 +89,12 @@ public class GeoRestApi {
 	}
 	
 	/**
-	 * updates resources (Country) to the database
+	 * Updates resources (Country) to the database
 	 * 
 	 * Response: 
 	 *    200 - Record was Created. 
 	 *    401 - User has no Access 
-	 *    406 - Insert Failed.
+	 *    406 - Request Failed.
 	 * 
 	 * @return
 	 */
@@ -107,6 +108,28 @@ public class GeoRestApi {
 			return Response.status(Status.OK).entity("Record has been updated").build();
 		} 
 		return Response.status(Status.BAD_REQUEST).entity("Updated Failed").build();	
+		
+	}
+	
+	/**
+	 * Updates resources (Country) to the database
+	 * 
+	 * Response: 
+	 *    200 - Record was Created. 
+	 *    401 - User has no Access 
+	 *    406 - Request Failed.
+	 * 
+	 * @return
+	 */
+	@DELETE
+	@Path("v1.0/countries/{id}")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Transactional
+	public Response deleteCountry(@PathParam("id") Long id) {
+		if (this.geoService.deleteCountryById(id) > 0) {
+			return Response.status(Status.OK).entity("Record has been deleted").build();
+		} 
+		return Response.status(Status.BAD_REQUEST).entity("Delete Failed").build();	
 		
 	}
 

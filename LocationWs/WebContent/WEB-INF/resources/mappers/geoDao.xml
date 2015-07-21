@@ -41,7 +41,7 @@
 	</update>
 	
 	<delete id="deleteCountryById" parameterType="Long">
-		Delete From ACCESSUSER3.V_COUNTRIES_SEQ Where ID = #{id}
+		Delete From ACCESSUSER3.VIRTELA_COUNTRIES Where ID = #{id}
 	</delete>
 
 </mapper>
