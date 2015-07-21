@@ -9,7 +9,31 @@
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context.xsd">
 
+	<!-- =============== Component Scans =============== -->
+	<context:component-scan base-package="net.virtela.service.*" />
+	<context:component-scan base-package="net.virtela.dao.*" />
+
 	<!-- =============== Rest API Service Registration =============== -->
 	<bean id="GeoRestApi" class="net.virtela.rest.api.GeoRestApi" />
+
+	<!-- =============== Data Source ================== -->
+	<bean id="accessuser3DataSource" class="org.springframework.jndi.JndiObjectFactoryBean"
+		scope="singleton">
+		<property name="jndiName" value="java:comp/env/jdbc/accessuser3Ds" />
+	</bean>
+
+	<!-- =============== Session Factory ================== -->
+
+	<bean id="accessuser3SessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="accessuser3DataSource" />
+		<property name="configLocation"
+			value="classpath:WEB-INF/resources/config/accessuser3-mybatisV3-config.xml" />
+	</bean>
+
+	<!-- =============== SessionFactory Mapper ================ -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="net.virtela.dao" />
+		<property name="sqlSessionFactoryBeanName" value="accessuser3SessionFactory" />
+	</bean>
 
 </beans>
