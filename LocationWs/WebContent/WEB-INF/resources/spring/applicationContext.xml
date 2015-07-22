@@ -9,14 +9,15 @@
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- =============== Component Scans =============== -->
-	
-	<context:component-scan base-package="net.virtela.service.*" />
-	
-	<context:component-scan base-package="net.virtela.dao.*" />
 
 	<!-- =============== Rest API Service Registration =============== -->
 	<bean id="GeoRestApi" class="net.virtela.rest.api.GeoRestApi" />
+
+	<!-- =============== Component Scans =============== -->
+
+	<context:component-scan base-package="net.virtela.service.*" />
+
+	<context:component-scan base-package="net.virtela.dao.*" />
 
 	<!-- =============== Data Source ================== -->
 	<bean id="accessuser3DataSource" class="org.springframework.jndi.JndiObjectFactoryBean"

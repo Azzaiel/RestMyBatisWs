@@ -1,10 +1,10 @@
 package net.virtela.rest.api;
 
-import net.virtela.filter.JSONRequestFilter.JSONRequestFilter;
-
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.spring.scope.RequestContextFilter;
+
+import net.virtela.filter.JSONRequestFilter;
 
 public class Application extends ResourceConfig {
 	/**
