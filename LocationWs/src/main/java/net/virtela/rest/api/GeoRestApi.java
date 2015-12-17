@@ -16,28 +16,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
+
+import net.virtela.constants.AppMessage;
 import net.virtela.model.Country;
+import net.virtela.model.ErrorMessages;
 import net.virtela.service.GeoService;
 
 @Component
 @Path("/geo_location")
+@Api(value = "Geo Location", description = "Service for locations")
+@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 public class GeoRestApi {
 	
 	@Autowired
 	private GeoService geoService;
-	
-	/**
-	 * Returns all resources (Country) from the database
-	 * 
-	 * Response: 
-	 *    200 - Data was found. 
-	 *    401 - User has no Access 
-	 *    404 - There was no date found.
-	 * 
-	 * @return
-	 */
+
 	@GET
 	@Path("v1.0/countries")
+	@ApiOperation(value = "Get Countries", notes = "Get All avaialble county in the database", response = Country.class,
+    responseContainer = "List")
+	@ApiResponses(value = { @ApiResponse(code = 404, message = AppMessage.ERROR_DATA_NOT_FOUND, response = ErrorMessages.class),
+	        @ApiResponse(code = 401, message = AppMessage.ERROR_UNAUTHORIZED_ACCESS, response = ErrorMessages.class) })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response getCountries() {
 		return Response.status(Status.OK).entity(this.geoService.getCountries()).build();
