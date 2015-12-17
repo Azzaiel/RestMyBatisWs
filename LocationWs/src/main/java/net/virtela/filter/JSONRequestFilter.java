@@ -1,4 +1,4 @@
-package net.virtela.filter.JSONRequestFilter;
+package net.virtela.filter;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;

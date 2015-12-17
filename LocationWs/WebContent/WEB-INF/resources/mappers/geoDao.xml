@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.virtela.dao.GeoDao">
+
+	<resultMap type="Country" id="countryMap">
+		<id column="ID" property="id" />
+		<result column="NAME" property="name" />
+		<result column="CODE" property="code" />
+		<result column="LAST_MODE_BY" property="lastModBy" />
+		<result column="LAST_MODE_DATE" property="lastModDate" />
+	</resultMap>
+	
+	<select id="getCountries" resultMap="countryMap">
+		Select ID, NAME, CODE, LAST_MODE_BY, LAST_MODE_DATE
+		From ACCESSUSER3.VIRTELA_COUNTRIES
+		Order By LAST_MODE_DATE desc
+	</select>
+	
+	<select id="getCountryById" resultMap="countryMap">
+		Select ID, NAME, CODE, LAST_MODE_BY, LAST_MODE_DATE
+		From ACCESSUSER3.VIRTELA_COUNTRIES
+		Where ID = #{id}
+	</select>
+	
+	<insert id="createCountry" parameterType="Country" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		<selectKey keyProperty="id" resultType="long" order="BEFORE">
+			Select ACCESSUSER3.V_COUNTRIES_SEQ.nextval From Dual
+		</selectKey>
+		Insert Into ACCESSUSER3.VIRTELA_COUNTRIES (ID, NAME, CODE, LAST_MODE_BY, LAST_MODE_DATE)
+		Values (#{id}, #{name}, #{code}, #{lastModBy}, Sysdate)
+	</insert>
+	
+	<update id="updateCountry" parameterType="Country" >
+		Update ACCESSUSER3.VIRTELA_COUNTRIES
+		Set NAME          = #{name}
+		    , CODE        = #{code}
+		    , LAST_MODE_BY   = #{lastModBy}
+		    , LAST_MODE_DATE = Sysdate
+		Where ID = #{id}
+	</update>
+	
+	<delete id="deleteCountryById" parameterType="Long">
+		Delete From ACCESSUSER3.VIRTELA_COUNTRIES Where ID = #{id}
+	</delete>
+
+</mapper>
