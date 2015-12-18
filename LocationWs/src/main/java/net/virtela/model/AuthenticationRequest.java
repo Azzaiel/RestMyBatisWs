@@ -2,7 +2,10 @@ package net.virtela.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.wordnik.swagger.annotations.ApiModel;
+
 @XmlRootElement
+@ApiModel(value = "Authentication Request", description = "Username and Password to sent to the webservice for authentication")
 public class AuthenticationRequest {
 
 	private String username;
