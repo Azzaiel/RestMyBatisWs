@@ -7,6 +7,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import com.wordnik.swagger.annotations.Api;
@@ -24,6 +25,8 @@ import net.virtela.model.ErrorMessages;
 @Api(value = "Auth Service", description = "Authentication and Authorization Service")
 @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 public class AuthRestApi {
+	
+	private static Logger logger = Logger.getLogger(AuthRestApi.class);
 
 	@ApiOperation(value = "Google Login", notes = "Auth", response = LoginCredential.class)
 	@ApiResponses(value = { @ApiResponse(code = 401, message = "Unauthorized Access", response = ErrorMessages.class),
@@ -33,7 +36,7 @@ public class AuthRestApi {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response login(@ApiParam(value = "Username and Password Container", required = true) AuthenticationRequest authRequest) {
-		
+		logger.info("User: " + authRequest.getUsername() + ": Attemped googel Open ID authentication");
 		return null;
 	}
 
