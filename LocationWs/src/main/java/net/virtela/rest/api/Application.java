@@ -15,7 +15,6 @@ public class Application extends ResourceConfig {
 	 * Register JAX-RS application components.
 	 */
 	public Application() {
-		System.out.println("APPP RINNNIGIDAFD!!!!!!!!!!");
 		// Connect Jersy to Spring
 		register(RequestContextFilter.class);
 		

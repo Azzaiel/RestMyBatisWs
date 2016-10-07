@@ -36,28 +36,22 @@ public class GeoRestApi {
 	private GeoService geoService;
 
 	@GET
-	@Path("v1.0/countries")
-	@ApiOperation(value = "Get Countries", notes = "Get All avaialble county in the database", response = Country.class,
-    responseContainer = "List")
-	@ApiResponses(value = { @ApiResponse(code = 404, message = AppMessage.ERROR_DATA_NOT_FOUND, response = ErrorMessages.class),
-	        @ApiResponse(code = 401, message = AppMessage.ERROR_UNAUTHORIZED_ACCESS, response = ErrorMessages.class) })
+	@Path("v1.0/country/list")
+	@ApiOperation(value = "Get All Country", notes = "Get All avaialble county in the database", response = Country.class
+	              , responseContainer = "List")
+	@ApiResponses(value = { @ApiResponse(code = 404, message = AppMessage.ERROR_DATA_NOT_FOUND, response = ErrorMessages.class)
+	                        , @ApiResponse(code = 401, message = AppMessage.ERROR_UNAUTHORIZED_ACCESS, response = ErrorMessages.class) })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response getCountries() {
 		return Response.status(Status.OK).entity(this.geoService.getCountries()).build();
 	}
 	
-	/**
-	 * Returns a resources (Country) from the database based on the ID given
-	 * 
-	 * Response: 
-	 *    200 - Data was found. 
-	 *    401 - User has no Access 
-	 *    404 - There was no date found.
-	 * 
-	 * @return
-	 */
+	
 	@GET
-	@Path("v1.0/countries/{id}")
+	@Path("v1.0/country/{id}")
+	@ApiOperation(value = "Get a Country by ID", notes = "Get a Spesifict Country via Primary Key", response = Country.class)
+	@ApiResponses(value = { @ApiResponse(code = 404, message = AppMessage.ERROR_DATA_NOT_FOUND, response = ErrorMessages.class)
+	                        , @ApiResponse(code = 401, message = AppMessage.ERROR_UNAUTHORIZED_ACCESS, response = ErrorMessages.class) })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response getCountryById(@PathParam("id") Long id) {
 		final Country country = this.geoService.getCountryById(id);
@@ -68,18 +62,12 @@ public class GeoRestApi {
 		
 	}
 	
-	/**
-	 * Inserts resources (Country) to the database
-	 * 
-	 * Response: 
-	 *    200 - Record was Created. 
-	 *    401 - User has no Access 
-	 *    406 - Request Failed.
-	 * 
-	 * @return
-	 */
 	@POST
 	@Path("v1.0/countries")
+	@ApiOperation(value = "Create Country", notes = "Inserts resources Country to the database", response = Country.class)
+    @ApiResponses(value = { @ApiResponse(code = 404, message = AppMessage.ERROR_DATA_NOT_FOUND, response = ErrorMessages.class)
+                  , @ApiResponse(code = 401, message = AppMessage.ERROR_UNAUTHORIZED_ACCESS, response = ErrorMessages.class)
+                  , @ApiResponse(code = 406, message = AppMessage.ERROR_INVALID_PARAMETER, response = ErrorMessages.class)})
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Transactional
@@ -103,6 +91,10 @@ public class GeoRestApi {
 	 */
 	@PUT
 	@Path("v1.0/countries/{id}")
+	@ApiOperation(value = "Update Country by ID", notes = "Updates resources Country to the database via ID", response = Country.class)
+    @ApiResponses(value = { @ApiResponse(code = 404, message = AppMessage.ERROR_DATA_NOT_FOUND, response = ErrorMessages.class)
+                  , @ApiResponse(code = 401, message = AppMessage.ERROR_UNAUTHORIZED_ACCESS, response = ErrorMessages.class)
+                  , @ApiResponse(code = 406, message = AppMessage.ERROR_INVALID_PARAMETER, response = ErrorMessages.class)})
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Transactional
@@ -114,18 +106,12 @@ public class GeoRestApi {
 		
 	}
 	
-	/**
-	 * Updates resources (Country) to the database
-	 * 
-	 * Response: 
-	 *    200 - Record was Created. 
-	 *    401 - User has no Access 
-	 *    406 - Request Failed.
-	 * 
-	 * @return
-	 */
 	@DELETE
 	@Path("v1.0/countries/{id}")
+	@ApiOperation(value = "Delete Country by ID", notes = "Delete resources Country to the database via ID", response = Country.class)
+    @ApiResponses(value = { @ApiResponse(code = 404, message = AppMessage.ERROR_DATA_NOT_FOUND, response = ErrorMessages.class)
+                  , @ApiResponse(code = 401, message = AppMessage.ERROR_UNAUTHORIZED_ACCESS, response = ErrorMessages.class)
+                  , @ApiResponse(code = 406, message = AppMessage.ERROR_INVALID_PARAMETER, response = ErrorMessages.class)})
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Transactional
 	public Response deleteCountry(@PathParam("id") Long id) {
