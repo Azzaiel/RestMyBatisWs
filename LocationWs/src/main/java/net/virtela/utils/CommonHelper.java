@@ -35,10 +35,6 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import net.lingala.zip4j.core.ZipFile;
-import net.lingala.zip4j.exception.ZipException;
-import net.lingala.zip4j.model.ZipParameters;
-import net.lingala.zip4j.util.Zip4jConstants;
 import net.virtela.constants.Constants;
 
 /**
@@ -1329,18 +1325,6 @@ public class CommonHelper {
 				file.delete();
 			}
 			new File(filePath).mkdir();
-		}
-	}
-
-	public static void zipFolder(String source, String savePath) {
-		try {
-			final ZipFile zipFile = new ZipFile(savePath);
-			final ZipParameters parameters = new ZipParameters();
-			parameters.setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_NORMAL);
-			parameters.setCompressionMethod(Zip4jConstants.COMP_DEFLATE);
-			zipFile.addFolder(source, parameters);
-		} catch (ZipException e) {
-			e.printStackTrace();
 		}
 	}
 

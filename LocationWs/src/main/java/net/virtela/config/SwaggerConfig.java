@@ -19,7 +19,7 @@ public class SwaggerConfig extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         BeanConfig beanConfig = new BeanConfig();
-        beanConfig.setVersion("1.0.0");
+        beanConfig.setVersion("1.1.0");
         beanConfig.setTitle("MyAppWs");
         beanConfig.setDescription("Sample Application for Rest MyBatis");
         beanConfig.setContact("Richard Reyles<rreyles@virtela.net>");

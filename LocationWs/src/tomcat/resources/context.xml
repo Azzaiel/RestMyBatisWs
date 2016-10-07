@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+
+	<!-- Default set of monitored resources -->
+	<WatchedResource>WEB-INF/web.xml</WatchedResource>
+
+	<Resource name="jdbc/accessuser3Ds" auth="Container"
+		type="com.mchange.v2.c3p0.ComboPooledDataSource" factory="org.apache.naming.factory.BeanFactory"
+		user="accessuser3" password="nc0pAdm1n" driverClass="oracle.jdbc.OracleDriver"
+		jdbcUrl="jdbc:oracle:thin:@DCOENG1-DWDEV-4:1521:access2" minPoolSize="1"
+		maxPoolSize="10" maxIdleTime="600" preferredTestQuery="select 1 from dual"
+		idleConnectionTestPeriod="180" numHelperThreads="5"
+		maxStatementsPerConnection="100" />
+
+</Context>
