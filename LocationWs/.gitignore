@@ -1,4 +1,33 @@
-.classpath
-.project
-.settings/
+# Java
+*.class
+
+# Maven
 target/
+
+# IntelliJ IDEA
+/out/
+.idea
+*.iml
+
+
+# Eclipse
+.externalToolBuilders/
+.settings/
+bin/
+*.bak
+*.classpath
+*.factorypath
+*.launch
+*.metadata
+*.project
+*.swp
+*.target
+*.tmp
+
+# Netbeans
+build/
+dist/
+nbbuild/
+nbdist/
+nbproject/private/
+nbactions.xml
