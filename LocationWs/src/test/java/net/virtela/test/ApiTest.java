@@ -43,7 +43,7 @@ public abstract class ApiTest {
 
 	private static final String SCHEME = "http://";
 	private static final String PORT = "8080";
-	private static final String APPLICATION = "SalesWs";
+	private static final String APPLICATION = "MyAppWs";
 	private static final String WS_TYPE = "rest";
 
 	public abstract String getModuleName();

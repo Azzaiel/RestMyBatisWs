@@ -36,7 +36,7 @@ public class GeoRestApi {
 	private GeoService geoService;
 
 	@GET
-	@Path("v1.0/country/list")
+	@Path("v1.0/country/list/")
 	@ApiOperation(value = "Get All Country", notes = "Get All avaialble county in the database", response = Country.class
 	              , responseContainer = "List")
 	@ApiResponses(value = { @ApiResponse(code = 404, message = AppMessage.ERROR_DATA_NOT_FOUND, response = ErrorMessages.class)
